@@ -1,5 +1,7 @@
 import java.util.Scanner;
 
+import database.Connection;
+
 public class App {
     private Scanner scanner = new Scanner(System.in);
 
@@ -22,7 +24,8 @@ public class App {
             System.out.println("=========================");
             System.out.println("1. Insert");
             System.out.println("2. Show");
-            System.out.println("3. Exit");
+            System.out.println("3. test");
+            System.out.println("4. Exit");
             System.out.print(">> ");
 
             try {
@@ -31,7 +34,7 @@ public class App {
                 input = 0;
             }
             scanner.nextLine();
-        } while (input < 1 || input > 3);
+        } while (input < 1 || input > 4);
 
         switch (input) {
             case 1:
@@ -44,11 +47,22 @@ public class App {
                 Show();
                 break;
 
+            case 3:
+                test();
+                break;
+
             default:
                 System.out.println("Thank you for using this application...");
                 System.out.println("© 2023, kuitkatnekat by Aditya, Karina, and Luke");
                 return;
         }
+    }
+
+    public void test() {
+        Connection connect = new Connection();
+
+        connect.testing();
+        System.out.println("this is testing");
     }
 
     private void Insert() {

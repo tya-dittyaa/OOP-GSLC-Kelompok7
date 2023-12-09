@@ -4,7 +4,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 
 public class Connection {
-  public static void testing() {
+  public void testing() {
     try {
       FileReader fileInput = new FileReader("src/database/user.csv");
       BufferedReader reader = new BufferedReader(fileInput);
