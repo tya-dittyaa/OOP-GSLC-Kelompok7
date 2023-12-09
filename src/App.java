@@ -61,7 +61,7 @@ public class App {
     public void test() {
         Connection connect = new Connection();
 
-        connect.testing();
+        connect.writeFile();
         System.out.println("this is testing");
     }
 
