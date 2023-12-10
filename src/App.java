@@ -59,10 +59,10 @@ public class App {
     }
 
     public void test() {
-        Connection connect = new Connection();
+        // Connection connect = new Connection();
 
-        connect.writeFile();
-        System.out.println("this is testing");
+        // connect.writeFile();
+        // System.out.println("this is testing");
     }
 
     private void Insert() {

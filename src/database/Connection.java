@@ -5,20 +5,32 @@ import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.util.Scanner;
+// import repository.TeamRepository;
 
 public class Connection {
-  Scanner scan = new Scanner(System.in);
+  public void readTeamFile() {
+    try {
+      FileReader fileInput = new FileReader("src/database/teams.csv");
+      BufferedReader reader = new BufferedReader(fileInput);
 
-  public void readFile() {
-    int x = 0;
-    System.out.println("WHich table to show? 1. User | 2. Team");
-    x = scan.nextInt();
-    scan.nextLine();
-    
-    if(x == 1) {
-      System.out.println("this is user file: ");
+      reader.readLine();
 
-      try {
+      String line;
+
+      while ((line = reader.readLine()) != null) {
+        String[] splitResult = line.split(",");
+        String nim = splitResult[0];
+        String teamName = splitResult[1];
+        System.out.printf("NIM: %s | Team Name: %s\n", nim, teamName);
+      }
+      reader.close();
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+  }
+
+public void readUserFile() {
+    try {
         FileReader fileInput = new FileReader("src/database/user.csv");
         BufferedReader reader = new BufferedReader(fileInput);
 
@@ -31,92 +43,19 @@ public class Connection {
           String nim = splitResult[0];
           String name = splitResult[1];
           Integer team = Integer.parseInt(splitResult[2]);
-          System.out.printf("NIM: %s | Name: %s | Team: %d\n", nim, name, team);
+
+          // display (test)
+          // System.out.printf("NIM: %s | Name: %s | Team: %d\n", nim, name, team);
         }
 
         reader.close();
       } catch (Exception e) {
-        // TODO: handle exception
         e.printStackTrace();
       }
-
-    } else {
-      System.out.println("this is team file: ");
-
-      try {
-        FileReader fileInput = new FileReader("src/database/teams.csv");
-        BufferedReader reader = new BufferedReader(fileInput);
-
-        reader.readLine();
-
-        String line;
-
-        while ((line = reader.readLine()) != null) {
-          String[] splitResult = line.split(",");
-          String nim = splitResult[0];
-          String teamName = splitResult[1];
-          System.out.printf("NIM: %s | Team Name: %s\n", nim, teamName);
-        }
-        reader.close();
-      } catch (Exception e) {
-        // TODO: handle exception
-        e.printStackTrace();
-      }
-
-    }
-
   }
 
-  public void writeFile() {
-    int x = 0;
-    System.out.println("Which table to insert? 1. User | 2. Team");
-    x = scan.nextInt();
-    scan.nextLine();
-    
-    if(x == 1) {
-      String nim, name;
-      int id;
-
-      System.out.print("Enter name: ");
-      name = scan.nextLine();
-
-      System.out.print("Enter nim: ");
-      nim = scan.nextLine();
-
-      System.out.print("Enter id team: ");
-      id = scan.nextInt();
-      scan.nextLine();
-
-      System.out.println("you are in user file: ");
-
-      try {
-        FileWriter fileInput = new FileWriter("src/database/user.csv", true);
-        BufferedWriter writer = new BufferedWriter(fileInput);
-
-        writer.write(nim + "," + name + "," + id);
-
-        writer.close();
-      } catch (Exception e) {
-        // do nothing
-      }
-
-      System.out.println("User data successfully inserted!");
-
-    } 
-    else if(x == 2) {
-      String teamName;
-      int id;
-
-      System.out.print("Enter team name: ");
-      teamName = scan.nextLine();
-
-      System.out.print("Enter id team: ");
-      id = scan.nextInt();
-      scan.nextLine();
-
-      System.out.println("you are in user file: ");
-
-      try {
+  public void writeTeamFile(int id, String teamName) {
+    try {
         FileWriter fileInput = new FileWriter("src/database/teams.csv", true);
         BufferedWriter writer = new BufferedWriter(fileInput);
 
@@ -124,14 +63,61 @@ public class Connection {
 
         writer.close();
       } catch (Exception e) {
-        // do nothing
+        e.printStackTrace();
       }
-      
-      System.out.println("Team data successfully inserted!");
-    }
-    else {
-      System.out.println("Invalid input");
-    }
+  }
 
+  public void writeUserFile(String nim, String name, int id) {
+    try {
+        FileWriter fileInput = new FileWriter("src/database/user.csv", true);
+        BufferedWriter writer = new BufferedWriter(fileInput);
+
+        if(checkTeamCapacity(id) == true) {
+          writer.write(nim + "," + name + "," + id);
+        }
+        else {
+          System.out.println("Team full!");
+        }
+        
+        writer.close();
+      } catch (Exception e) {
+        e.printStackTrace();
+      }
+  }
+
+  public boolean checkTeamCapacity(int id) {
+    try {
+        FileReader fileInput = new FileReader("src/database/user.csv");
+        BufferedReader reader = new BufferedReader(fileInput);
+
+        reader.readLine();
+
+        String line;
+        int count = 0;
+        boolean valid = true;
+        
+
+        while ((line = reader.readLine()) != null) {
+          String[] splitResult = line.split(",");
+          String nim = splitResult[0];
+          String name = splitResult[1];
+          Integer teamID = Integer.parseInt(splitResult[2]);
+
+          // check if there are 3 ppl in the team
+          if(teamID == id && count < 3) {
+            count++;
+          }
+          else if(count == 3){
+            System.out.println("Team full!");
+            return false;
+          }          
+        }
+        reader.close();
+      } catch (Exception e) {
+        e.printStackTrace();
+      }
+
+      return true;
   }
 }
+
