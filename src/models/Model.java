@@ -1,24 +1,18 @@
 package models;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class Model {
-  protected List<String[]> data;
+  private int teamId;
 
-  public Model() {
-    this.data = new ArrayList<>();
+  public Model(int teamId) {
+    this.teamId = teamId;
   }
 
-  public List<String[]> getData() {
-    return data;
+  public int getTeamId() {
+    return teamId;
   }
 
-  public void setData(List<String[]> data) {
-    this.data = data;
+  public void setTeamId(int teamId) {
+    this.teamId = teamId;
   }
 
-  public void addData(String[] newData) {
-    this.data.add(newData);
-  }
 }
