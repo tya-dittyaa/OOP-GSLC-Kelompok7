@@ -1,6 +1,6 @@
 package repository;
 
-public interface TeamRepository extends repository{
+public interface TeamRepository extends Repository{
     void readTeamFile();
-    void writeTeamFile(String teamName, String id);
+    void writeTeamFile(String teamName, int id);
 }

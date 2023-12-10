@@ -1,7 +1,7 @@
 package repository;
 import database.Connection;
 
-public interface UserRepository extends repository{
+public interface UserRepository extends Repository{
     void readUserFile();
-    void writeUserFile(String name, String nim, String id);
+    void writeUserFile(String name, String nim, int id);
 }
