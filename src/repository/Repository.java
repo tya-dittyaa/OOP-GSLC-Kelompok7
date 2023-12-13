@@ -8,7 +8,7 @@ import models.Model;
 /**
  * Repository
  */
-public interface Repository<T extends Model> {
+public abstract interface Repository<T extends Model> {
 
   ArrayList<T> find(String column, String[] condition, boolean joinTable, String joinTableName, Connection<T> conn);
 
