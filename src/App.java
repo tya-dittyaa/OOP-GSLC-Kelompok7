@@ -1,12 +1,8 @@
 import java.util.Scanner;
 
-import connection.TeamConnection;
-import connection.UserConnection;
-
 public class App {
     private Scanner scanner = new Scanner(System.in);
-    private UserConnection uc = UserConnection.getInstance();
-    private TeamConnection tc = TeamConnection.getInstance();
+    private Hackathon hackathon;
 
     public static void main(String[] args) throws Exception {
         new App();
