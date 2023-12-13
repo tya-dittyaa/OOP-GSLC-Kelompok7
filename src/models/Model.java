@@ -1,18 +1,14 @@
 package models;
 
-public class Model {
-  private int teamId;
+/**
+ * Model
+ */
+public abstract class Model {
 
-  public Model(int teamId) {
-    this.teamId = teamId;
-  }
+  public int id;
 
-  public int getTeamId() {
-    return teamId;
-  }
-
-  public void setTeamId(int teamId) {
-    this.teamId = teamId;
+  public Model(int id) {
+    this.id = id;
   }
 
 }
