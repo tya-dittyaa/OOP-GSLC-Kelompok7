@@ -1,7 +1,10 @@
 package connection;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.util.ArrayList;
 
 import models.Team;
@@ -11,7 +14,15 @@ import models.Team;
  */
 public class TeamConnection implements Connection<Team> {
 
-  private String filePath = "src/database/teams.csv";
+  private static TeamConnection conn; // singleton
+  private File filePath = new File("src/database/teams.csv");
+
+  public static TeamConnection getInstance() {
+    if (TeamConnection.conn == null) {
+      TeamConnection.conn = new TeamConnection();
+    }
+    return TeamConnection.conn;
+  }
 
   @Override
   public ArrayList<Team> readFile() {
@@ -33,18 +44,34 @@ public class TeamConnection implements Connection<Team> {
       }
 
       reader.close();
+      fileInput.close();
 
+      return data;
     } catch (Exception e) {
       // TODO: handle exception
+      return null;
     }
 
-    return data;
   }
 
   @Override
-  public void writeFile(ArrayList<Team> data) {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Unimplemented method 'writeFile'");
+  public boolean writeFile(Team data) {
+    try {
+      FileWriter fileOutput = new FileWriter(filePath, true);
+      BufferedWriter writer = new BufferedWriter(fileOutput);
+
+      String lineToInput = String.format("%d,%s\n", data.id, data.name);
+      writer.write(lineToInput);
+
+      writer.close();
+      fileOutput.close();
+
+      return true;
+
+    } catch (Exception e) {
+      // TODO: handle exception
+      return false;
+    }
   }
 
 }

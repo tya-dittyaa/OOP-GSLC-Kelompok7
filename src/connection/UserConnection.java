@@ -1,14 +1,25 @@
 package connection;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.util.ArrayList;
 
 import models.User;
 
 public class UserConnection implements Connection<User> {
 
-  private String filePath = "src/database/user.csv";
+  private static UserConnection conn; // singleton
+  private File filePath = new File("src/database/user.csv");
+
+  public static UserConnection getInstance() {
+    if (UserConnection.conn == null) {
+      UserConnection.conn = new UserConnection();
+    }
+    return UserConnection.conn;
+  }
 
   @Override
   public ArrayList<User> readFile() {
@@ -31,18 +42,32 @@ public class UserConnection implements Connection<User> {
       }
 
       reader.close();
-
+      return data;
     } catch (Exception e) {
       // TODO: handle exception
+      return null;
     }
 
-    return data;
   }
 
   @Override
-  public void writeFile(ArrayList<User> data) {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Unimplemented method 'writeFile'");
+  public boolean writeFile(User data) {
+    try {
+      FileWriter fileOutput = new FileWriter(filePath, true);
+      BufferedWriter writer = new BufferedWriter(fileOutput);
+
+      String lineToInput = String.format("%s,%s,%d\n", data.nim, data.name, data.id);
+      writer.write(lineToInput);
+
+      writer.close();
+      fileOutput.close();
+
+      return true;
+
+    } catch (Exception e) {
+      // TODO: handle exception
+      return false;
+    }
   }
 
 }

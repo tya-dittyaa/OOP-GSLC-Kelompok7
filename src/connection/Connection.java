@@ -2,12 +2,14 @@ package connection;
 
 import java.util.ArrayList;
 
+import models.Model;
+
 /**
  * Connection
  */
-public interface Connection<T> {
+public interface Connection<T extends Model> {
 
   public ArrayList<T> readFile();
 
-  public void writeFile(ArrayList<T> data);
+  public boolean writeFile(T data);
 }
