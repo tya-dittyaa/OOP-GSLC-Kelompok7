@@ -37,28 +37,44 @@ private Scanner scanner = new Scanner(System.in);
   }
 
     // TODO: insert one user
-public void insertUser() {
-  System.out.print("Enter user name: ");
-  String name = scanner.nextLine();
-  boolean isValidNIM = false;
-  String nim = null;
-  do {
-      System.out.print("Enter user NIM: ");
-      nim = scanner.nextLine();
-      if (nim.matches("^[1-9]\\d*$")) {
-          isValidNIM = true;
-      } else {
-          System.out.println("Invalid NIM. Please enter a valid numeric value.");
-      }
-  } while (!isValidNIM);
+    public void insertUser() {
+        System.out.print("Enter user name: ");
+        String name = scanner.nextLine();
 
-  System.out.print("Enter team ID for the user: ");
-  int teamId = scanner.nextInt();
-  ur.insert(new String[] { nim, name, String.valueOf(teamId) }, uc);
-  System.out.println("User inserted successfully.");
-}
+        boolean isValidNIM = false;
+        String nim = null;
+        do {
+            System.out.print("Enter user NIM: ");
+            nim = scanner.nextLine();
 
+            if (nim.matches("^[1-9]\\d*$")) {
+                isValidNIM = true;
+            } else {
+                System.out.println("Invalid NIM. Please enter a valid numeric value.");
+            }
+        } while (!isValidNIM);
 
+        System.out.print("Enter team ID for the user: ");
+        int teamId = scanner.nextInt();
+
+        // Check if the team is full before inserting a new user
+        if (isTeamFull(teamId)) {
+            System.out.println("Cannot add user. The team is already full.");
+            return;
+        }
+
+        ur.insert(new String[] { nim, name, String.valueOf(teamId) }, uc);
+        System.out.println("User inserted successfully.");
+    }
+
+    // Method to check if a team is full
+    private boolean isTeamFull(int teamId) {
+        int teamMemberCount = tr.getTeamMemberCount(teamId, tc);
+        int maxTeamMembers = 3; 
+
+        return teamMemberCount >= maxTeamMembers;
+    }
+    
     // TODO: find one team
     public void findTeam() {
         System.out.print("Enter team ID: ");
