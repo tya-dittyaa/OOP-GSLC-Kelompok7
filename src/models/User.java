@@ -17,8 +17,7 @@ public class User extends Connection implements UserRepository{
 
     @Override
     public void find(String columnName, String[] filterCondition, Boolean joinTable, String joinTableName, Connection obj) {
-        // ignore this
-        throw new UnsupportedOperationException("Unimplemented method 'find'");
+        
     }
 
     @Override
