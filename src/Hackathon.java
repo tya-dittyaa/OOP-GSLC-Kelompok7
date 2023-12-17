@@ -20,7 +20,7 @@ public class Hackathon {
     return ur.findOne(column, condition, joinTable, joinTableName, conn);
   }
 
-  // TODO: find one many user
+  // TODO: find many user
   public ArrayList<User> findUsers(String column, String[] condition, Boolean joinTable, String joinTableName,
       Connection<User> conn) {
     return ur.find(column, condition, joinTable, joinTableName, conn);
@@ -58,13 +58,13 @@ public class Hackathon {
     return tr.findOne(column, condition, joinTable, joinTableName, conn);
   }
 
-  // TODO: find one many team
+  // TODO: find many team
   public ArrayList<Team> findTeams(String column, String[] condition, Boolean joinTable, String joinTableName,
       Connection<Team> conn) {
     return tr.find(column, condition, joinTable, joinTableName, conn);
   }
 
-  // TODO: insert one 1 team
+  // TODO: insert one team
   public Team insertTeam(String name) {
     String[] conditionForCheck = { "=", name };
     String[] conditionForInsert = { name };
