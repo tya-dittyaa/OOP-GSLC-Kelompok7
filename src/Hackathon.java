@@ -79,13 +79,16 @@ public void insertUser() {
     }
 
     // TODO: find many teams
-    public void findTeams() {
-        List<Team> teamList = tr.find("column", new String[] { "condition" }, false, null, tc);
-        
+    public void findTeams(String column, String[] condition, boolean joinTable, String joinTableName, Connection<Team> conn) {
+       ArrayList<Team> teamList = tr.find(column, condition, joinTable, joinTableName, conn);
 
-        
-        for (Team team : teamList) {
-            System.out.println("Team: " + team.name);
+        if (teamList != null && !teamList.isEmpty()) {
+            for (Team team : teamList) {
+                System.out.println("Team: " + team.name);
+                System.out.println("-------------");
+            }
+        } else {
+            System.out.println("Data not found");
         }
     }
 
