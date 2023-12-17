@@ -29,13 +29,17 @@ public class Hackathon {
   // TODO: insert one user
   public Boolean insertUser(String nim, String name, String teamName) {
     String[] conditionForCheck = { "=", teamName };
-    int getTeamId = 0;
-
     Team getTeamFirst = tr.findOne("name", conditionForCheck, null, null, tc);
-    if (getTeamFirst != null)
-      getTeamId = getTeamFirst.id;
 
-    System.out.println(getTeamId);
+    if (getTeamFirst != null) {
+      System.out.println(getTeamFirst.id);
+      String[] conditionForCheckTeamId = { "=", Integer.toString(getTeamFirst.id) };
+      ArrayList<User> tempList = findUsers("teamId", conditionForCheckTeamId, null, null, uc);
+
+      // for (User user : tempList) {
+      //   System.out.println(user.name);
+      // }
+    }
 
     return false;
   }
