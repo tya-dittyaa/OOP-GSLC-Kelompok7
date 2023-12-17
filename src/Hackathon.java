@@ -27,21 +27,29 @@ public class Hackathon {
   }
 
   // TODO: insert one user
-  public Boolean insertUser(String nim, String name, String teamName) {
+  public User insertUser(String nim, String name, String teamName) {
+    int teamId = 0;
     String[] conditionForCheck = { "=", teamName };
     Team getTeamFirst = tr.findOne("name", conditionForCheck, null, null, tc);
 
     if (getTeamFirst != null) {
-      System.out.println(getTeamFirst.id);
       String[] conditionForCheckTeamId = { "=", Integer.toString(getTeamFirst.id) };
       ArrayList<User> tempList = findUsers("teamId", conditionForCheckTeamId, null, null, uc);
 
-      // for (User user : tempList) {
-      //   System.out.println(user.name);
-      // }
+      if (tempList.size() == 3) {
+        return null;
+      }
+
+      teamId = getTeamFirst.id;
+    } else {
+      String[] conditionForInsertTeamName = { teamName };
+      Team newTeam = tr.insert(conditionForInsertTeamName, tc);
+
+      teamId = newTeam.id;
     }
 
-    return false;
+    String[] conditionForInsertNewUser = { nim, name, Integer.toString(teamId) };
+    return ur.insert(conditionForInsertNewUser, uc);
   }
 
   // TODO: find one 1 team
@@ -57,16 +65,15 @@ public class Hackathon {
   }
 
   // TODO: insert one 1 team
-  public Boolean insertTeam(String name) {
+  public Team insertTeam(String name) {
     String[] conditionForCheck = { "=", name };
     String[] conditionForInsert = { name };
     Team checkTeam = findTeam("name", conditionForCheck, null, null, tc);
 
     if (checkTeam != null) {
-      return false;
+      return null;
     } else {
-      tr.insert(conditionForInsert, tc);
-      return true;
+      return tr.insert(conditionForInsert, tc);
     }
   }
 }

@@ -1,5 +1,8 @@
 import java.util.Scanner;
 
+import models.Team;
+import models.User;
+
 public class App {
     private Scanner scanner = new Scanner(System.in);
     private Hackathon hackathon = new Hackathon();
@@ -102,10 +105,10 @@ public class App {
                 checkLenInputTeamName = inputTeamName.length();
             } while (checkLenInputTeamName == 0);
 
-            Boolean isSuccess = hackathon.insertUser(inputNIM, inputName, inputTeamName);
+            User newUser = hackathon.insertUser(inputNIM, inputName, inputTeamName);
 
             System.out.println();
-            if (isSuccess) {
+            if (newUser != null) {
                 System.out.println("User created!");
             } else {
                 System.err.println("Error: Team full.");
@@ -121,10 +124,10 @@ public class App {
                 checkLenInputTeamName = inputTeamName.length();
             } while (checkLenInputTeamName == 0);
 
-            Boolean isSuccess = hackathon.insertTeam(inputTeamName);
+            Team newTeam = hackathon.insertTeam(inputTeamName);
 
             System.out.println();
-            if (isSuccess) {
+            if (newTeam != null) {
                 System.out.println("Team created!");
             } else {
                 System.err.println("Error: Team name already exist.");

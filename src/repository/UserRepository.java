@@ -64,7 +64,11 @@ public class UserRepository implements Repository<User> {
         }
       }
 
-      return newResult;
+      if (condition == null) {
+        return result;
+      } else {
+        return newResult;
+      }
     } catch (Exception e) {
       // TODO: handle exception
       e.printStackTrace();
@@ -139,8 +143,13 @@ public class UserRepository implements Repository<User> {
 
   @Override
   public User insert(String[] data, Connection<User> conn) {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Unimplemented method 'insert'");
+    String nim = data[0];
+    String name = data[1];
+    int teamId = Integer.parseInt(data[2]);
+
+    conn.writeFile(new User(nim, name, teamId));
+
+    return new User(nim, name, teamId);
   }
 
 }

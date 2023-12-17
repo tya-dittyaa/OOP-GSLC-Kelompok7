@@ -119,7 +119,7 @@ public class TeamRepository implements Repository<Team> {
 
     conn.writeFile(new Team(id, name));
 
-    return null;
+    return new Team(id, name);
   }
 
 }
