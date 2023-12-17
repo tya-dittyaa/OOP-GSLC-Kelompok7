@@ -1,18 +1,11 @@
-## Getting Started
+## COMP6820001 - Object Oriented Programming
 
-Welcome to the VS Code Java world. Here is a guideline to help you get started to write Java code in Visual Studio Code.
+### Session 9 (GSLC) Assignment
 
-## Folder Structure
+Ini adalah tugas sesi ke-9 untuk GSLC secara berkelompok. Tugas ini dikerjakan full menggunakan **Visual Studio Code** dan menggunakan Github untuk berhubungan antar anggota.
 
-The workspace contains two folders by default, where:
-
-- `src`: the folder to maintain sources
-- `lib`: the folder to maintain dependencies
-
-Meanwhile, the compiled output files will be generated in the `bin` folder by default.
-
-> If you want to customize the folder structure, open `.vscode/settings.json` and update the related settings there.
-
-## Dependency Management
-
-The `JAVA PROJECTS` view allows you to manage your dependencies. More details can be found [here](https://github.com/microsoft/vscode-java-dependency#manage-dependencies).
+> Anggota Kelompok
+>
+> - **`2602090196` - _Luke Mangala Soegianto_**
+> - **`2602099680` - _Karina Dwinovera Mulia_**
+> - **`2602113205` - _Aditya Fajri_**
