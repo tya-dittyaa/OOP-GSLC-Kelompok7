@@ -20,6 +20,11 @@ public class UserRepository implements Repository<User> {
       return null;
     }
 
+    if (column != null && condition != null && condition[0].equals("=") == false) {
+      System.err.println("Error: Kondisi filter tidak null, kondisi filter tidak null, tapi kondisi pertama harus '='");
+      return null;
+    }
+
     if (joinTableName == null && joinTable != null && joinTable) {
       System.err.println("Error: Nama table join null, tapi boolean kondisi join true.");
       return null;
@@ -40,33 +45,40 @@ public class UserRepository implements Repository<User> {
       return null;
     }
 
-    ArrayList<User> result = conn.readFile();
-    ArrayList<User> newResult = new ArrayList<>();
+    try {
+      ArrayList<User> result = conn.readFile();
 
-    for (User user : result) {
-      if (column.equals("nim")) {
-        if (condition[1].equals(user.nim)) {
-          newResult.add(user);
+      if (column == null && condition == null && joinTable == null && joinTableName == null) {
+        return result;
+      } else {
+        ArrayList<User> newResult = new ArrayList<>();
+
+        for (User user : result) {
+          if (column.equals("nim")) {
+            if (user.nim.equals(condition[1])) {
+              newResult.add(user);
+            }
+          }
+
+          if (column.equals("name")) {
+            if (user.name.toLowerCase().contains(condition[1].toLowerCase())) {
+              newResult.add(user);
+            }
+          }
+
+          if (column.equals("teamId")) {
+            if (Integer.toString(user.id).equals(condition[1])) {
+              newResult.add(user);
+            }
+          }
         }
-      }
 
-      if (column.equals("name")) {
-        if (condition[1].equalsIgnoreCase(user.name)) {
-          newResult.add(user);
-        }
+        return newResult;
       }
-
-      if (column.equals("teamId")) {
-        if (condition[1].equals(Integer.toString(user.id))) {
-          newResult.add(user);
-        }
-      }
-    }
-
-    if (condition == null) {
-      return result;
-    } else {
-      return newResult;
+    } catch (Exception e) {
+      // TODO: handle exception
+      e.printStackTrace();
+      return null;
     }
   }
 
@@ -84,6 +96,11 @@ public class UserRepository implements Repository<User> {
       return null;
     }
 
+    if (column != null && condition != null && condition[0].equals("=") == false) {
+      System.err.println("Error: Kondisi filter tidak null, kondisi filter tidak null, tapi kondisi pertama harus '='");
+      return null;
+    }
+
     if (joinTableName == null && joinTable != null && joinTable) {
       System.err.println("Error: Nama table join null, tapi boolean kondisi join true.");
       return null;
@@ -104,29 +121,35 @@ public class UserRepository implements Repository<User> {
       return null;
     }
 
-    ArrayList<User> result = conn.readFile();
+    try {
+      ArrayList<User> result = conn.readFile();
 
-    for (User user : result) {
-      if (column.equals("nim")) {
-        if (condition[1].equals(user.nim)) {
-          return user;
+      for (User user : result) {
+        if (column.equals("nim")) {
+          if (user.nim.equals(condition[1])) {
+            return user;
+          }
+        }
+
+        if (column.equals("name")) {
+          if (user.name.toLowerCase().contains(condition[1].toLowerCase())) {
+            return user;
+          }
+        }
+
+        if (column.equals("teamId")) {
+          if (Integer.toString(user.id).equals(condition[1])) {
+            return user;
+          }
         }
       }
 
-      if (column.equals("name")) {
-        if (condition[1].equalsIgnoreCase(user.name)) {
-          return user;
-        }
-      }
-
-      if (column.equals("teamId")) {
-        if (condition[1].equals(Integer.toString(user.id))) {
-          return user;
-        }
-      }
+      return null;
+    } catch (Exception e) {
+      // TODO: handle exception
+      e.printStackTrace();
+      return null;
     }
-
-    return null;
   }
 
   @Override
