@@ -64,7 +64,7 @@ public class UserRepository implements Repository<User> {
         }
       }
 
-      return result;
+      return newResult;
     } catch (Exception e) {
       // TODO: handle exception
       e.printStackTrace();
