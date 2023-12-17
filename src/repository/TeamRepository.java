@@ -8,8 +8,9 @@ import models.Team;
 public class TeamRepository implements Repository<Team> {
 
   @Override
-  public ArrayList<Team> find(String column, String[] condition, boolean joinTable, String joinTableName,
-      Connection<Team> conn) {
+  public ArrayList<Team> find(String column, String[] condition, boolean joinTable, String joinTableName, Connection<Team> conn) {
+
+
     // TODO Auto-generated method stub
     throw new UnsupportedOperationException("Unimplemented method 'find'");
   }

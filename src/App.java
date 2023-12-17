@@ -1,8 +1,13 @@
+import java.util.ArrayList;
 import java.util.Scanner;
+
+import connection.Connection;
+import connection.UserConnection;
+import models.User;
 
 public class App {
     private Scanner scanner = new Scanner(System.in);
-    private Hackathon hackathon;
+    private Hackathon hackathon = new Hackathon();
 
     public static void main(String[] args) throws Exception {
         new App();
@@ -116,6 +121,8 @@ public class App {
             scanner.nextLine();
         } while (inputTable < 1 || inputTable > 2);
 
+        boolean joinTable;
+
         do {
             System.out.println();
             System.out.println("Want to filter by condition?");
@@ -129,6 +136,9 @@ public class App {
                 inputFilter = 0;
             }
             scanner.nextLine();
+
+            joinTable = (inputFilter == 1) ? true : false;
+
         } while (inputFilter < 1 || inputFilter > 2);
 
         if (inputFilter == 1) {
@@ -138,6 +148,25 @@ public class App {
             System.out.print(">> ");
 
             inputCondition = scanner.nextLine();
+            String columnName = null, operation = null, condition = null;
+            String[] inputSplit = inputCondition.split(";", 5);          
+
+            columnName = inputSplit[0];
+            operation = inputSplit[1];
+            condition = inputSplit[2];
+
+            UserConnection uc = UserConnection.getInstance();
+            System.out.println();
+            hackathon.findUsers(columnName, inputSplit, joinTable, condition, uc);
+            // System.out.println("data displayed");
+        }
+        else if(inputFilter == 2){
+            String columnName = null, operation = null, condition = null;
+
+            UserConnection uc = UserConnection.getInstance();
+            // System.out.println("col: " + columnName + ", jointbl: " + joinTable);
+            hackathon.findUsers(null, null, false, null, uc);
+            // System.out.println("data displayed");
         }
     }
 }
