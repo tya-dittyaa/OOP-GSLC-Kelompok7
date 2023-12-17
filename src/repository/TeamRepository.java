@@ -27,5 +27,9 @@ public class TeamRepository implements Repository<Team> {
     // TODO Auto-generated method stub
     throw new UnsupportedOperationException("Unimplemented method 'insert'");
   }
-
+    //number of team members based on team ID
+    public int getTeamMemberCount(int teamId, Connection<Team> conn) {
+      ArrayList<Team> teamMembers = find("id", new String[] { String.valueOf(teamId) }, true, "team_members", conn);
+      return teamMembers.size();
+  }
 }

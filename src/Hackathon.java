@@ -42,29 +42,29 @@ public class Hackathon {
     }
 
     // TODO: insert one user
-    public void insertUser() {
-        System.out.print("Enter user name: ");
-        String name = scanner.nextLine();
-        boolean isValidNIM = false;
-        String nim = null;
-        do {
-            System.out.print("Enter user NIM: ");
-            nim = scanner.nextLine();
-            if (nim.matches("^[1-9]\\d*$")) {
-                isValidNIM = true;
-            } else {
-                System.out.println("Invalid NIM. Please enter a valid numeric value.");
-            }
-        } while (!isValidNIM);
+public void insertUser() {
+  System.out.print("Enter user name: ");
+  String name = scanner.nextLine();
+  boolean isValidNIM = false;
+  String nim = null;
+  do {
+      System.out.print("Enter user NIM: ");
+      nim = scanner.nextLine();
+      if (nim.matches("^[1-9]\\d*$")) {
+          isValidNIM = true;
+      } else {
+          System.out.println("Invalid NIM. Please enter a valid numeric value.");
+      }
+  } while (!isValidNIM);
 
-        System.out.print("Enter team ID for the user: ");
-        int teamId = scanner.nextInt();
-        ur.insert(new String[] { nim, name, String.valueOf(teamId) }, uc);
-        System.out.println("User inserted successfully.");
-    }
+  System.out.print("Enter team ID for the user: ");
+  int teamId = scanner.nextInt();
+  ur.insert(new String[] { nim, name, String.valueOf(teamId) }, uc);
+  System.out.println("User inserted successfully.");
+}
 
 
-// TODO: find one team
+    // TODO: find one team
     public void findTeam() {
         System.out.print("Enter team ID: ");
         int teamId = scanner.nextInt();
