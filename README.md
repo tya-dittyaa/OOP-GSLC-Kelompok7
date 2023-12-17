@@ -1,6 +1,6 @@
 ## COMP6820001 - Object Oriented Programming
 
-### Session 9 (GSLC) Assignment
+### Session 9 (GSLC) Assignment - Class LA08
 
 Ini adalah tugas sesi ke-9 untuk GSLC secara berkelompok. Tugas ini dikerjakan full menggunakan **Visual Studio Code** dan menggunakan Github untuk berhubungan antar anggota.
 
