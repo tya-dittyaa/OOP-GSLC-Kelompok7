@@ -40,39 +40,33 @@ public class UserRepository implements Repository<User> {
       return null;
     }
 
-    try {
-      ArrayList<User> result = conn.readFile();
-      ArrayList<User> newResult = new ArrayList<>();
+    ArrayList<User> result = conn.readFile();
+    ArrayList<User> newResult = new ArrayList<>();
 
-      for (User user : result) {
-        if (column.equals("nim")) {
-          if (condition[1].equals(user.nim)) {
-            newResult.add(user);
-          }
-        }
-
-        if (column.equals("name")) {
-          if (condition[1].equalsIgnoreCase(user.name)) {
-            newResult.add(user);
-          }
-        }
-
-        if (column.equals("teamId")) {
-          if (condition[1].equals(Integer.toString(user.id))) {
-            newResult.add(user);
-          }
+    for (User user : result) {
+      if (column.equals("nim")) {
+        if (condition[1].equals(user.nim)) {
+          newResult.add(user);
         }
       }
 
-      if (condition == null) {
-        return result;
-      } else {
-        return newResult;
+      if (column.equals("name")) {
+        if (condition[1].equalsIgnoreCase(user.name)) {
+          newResult.add(user);
+        }
       }
-    } catch (Exception e) {
-      // TODO: handle exception
-      e.printStackTrace();
-      return null;
+
+      if (column.equals("teamId")) {
+        if (condition[1].equals(Integer.toString(user.id))) {
+          newResult.add(user);
+        }
+      }
+    }
+
+    if (condition == null) {
+      return result;
+    } else {
+      return newResult;
     }
   }
 
@@ -110,35 +104,29 @@ public class UserRepository implements Repository<User> {
       return null;
     }
 
-    try {
-      ArrayList<User> result = conn.readFile();
+    ArrayList<User> result = conn.readFile();
 
-      for (User user : result) {
-        if (column.equals("nim")) {
-          if (condition[1].equals(user.nim)) {
-            return user;
-          }
-        }
-
-        if (column.equals("name")) {
-          if (condition[1].equalsIgnoreCase(user.name)) {
-            return user;
-          }
-        }
-
-        if (column.equals("teamId")) {
-          if (condition[1].equals(Integer.toString(user.id))) {
-            return user;
-          }
+    for (User user : result) {
+      if (column.equals("nim")) {
+        if (condition[1].equals(user.nim)) {
+          return user;
         }
       }
 
-      return null;
-    } catch (Exception e) {
-      // TODO: handle exception
-      e.printStackTrace();
-      return null;
+      if (column.equals("name")) {
+        if (condition[1].equalsIgnoreCase(user.name)) {
+          return user;
+        }
+      }
+
+      if (column.equals("teamId")) {
+        if (condition[1].equals(Integer.toString(user.id))) {
+          return user;
+        }
+      }
     }
+
+    return null;
   }
 
   @Override

@@ -41,14 +41,27 @@ public class TeamRepository implements Repository<Team> {
       return null;
     }
 
-    try {
-      ArrayList<Team> result = conn.readFile();
+    ArrayList<Team> result = conn.readFile();
+    ArrayList<Team> newResult = new ArrayList<>();
 
+    for (Team team : result) {
+      if (column.equals("id")) {
+        if (condition[1].equals(Integer.toString(team.id))) {
+          newResult.add(team);
+        }
+      }
+
+      if (column.equals("name")) {
+        if (condition[1].equalsIgnoreCase(team.name)) {
+          newResult.add(team);
+        }
+      }
+    }
+
+    if (condition == null) {
       return result;
-    } catch (Exception e) {
-      // TODO: handle exception
-      e.printStackTrace();
-      return null;
+    } else {
+      return newResult;
     }
   }
 
@@ -86,29 +99,23 @@ public class TeamRepository implements Repository<Team> {
       return null;
     }
 
-    try {
-      ArrayList<Team> result = conn.readFile();
+    ArrayList<Team> result = conn.readFile();
 
-      for (Team team : result) {
-        if (column.equals("id")) {
-          if (condition[1].equals(Integer.toString(team.id))) {
-            return team;
-          }
-        }
-
-        if (column.equals("name")) {
-          if (condition[1].equalsIgnoreCase(team.name)) {
-            return team;
-          }
+    for (Team team : result) {
+      if (column.equals("id")) {
+        if (condition[1].equals(Integer.toString(team.id))) {
+          return team;
         }
       }
 
-      return null;
-    } catch (Exception e) {
-      // TODO: handle exception
-      e.printStackTrace();
-      return null;
+      if (column.equals("name")) {
+        if (condition[1].equalsIgnoreCase(team.name)) {
+          return team;
+        }
+      }
     }
+
+    return null;
   }
 
   @Override
