@@ -2,6 +2,7 @@ import java.util.Scanner;
 
 public class App {
     private Scanner scanner = new Scanner(System.in);
+    private Hackathon hackathon;
 
     public static void main(String[] args) throws Exception {
         new App();
