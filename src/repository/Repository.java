@@ -10,9 +10,9 @@ import models.Model;
  */
 public abstract interface Repository<T extends Model> {
 
-  ArrayList<T> find(String column, String[] condition, boolean joinTable, String joinTableName, Connection<T> conn);
+  ArrayList<T> find(String column, String[] condition, Boolean joinTable, String joinTableName, Connection<T> conn);
 
-  T findOne(String column, String[] condition, boolean joinTable, String joinTableName, Connection<T> conn);
+  T findOne(String column, String[] condition, Boolean joinTable, String joinTableName, Connection<T> conn);
 
   T insert(String[] data, Connection<T> conn);
 

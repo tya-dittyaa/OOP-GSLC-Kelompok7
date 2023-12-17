@@ -8,14 +8,14 @@ import models.User;
 public class UserRepository implements Repository<User> {
 
   @Override
-  public ArrayList<User> find(String column, String[] condition, boolean joinTable, String joinTableName,
+  public ArrayList<User> find(String column, String[] condition, Boolean joinTable, String joinTableName,
       Connection<User> conn) {
     // TODO Auto-generated method stub
     throw new UnsupportedOperationException("Unimplemented method 'find'");
   }
 
   @Override
-  public User findOne(String column, String[] condition, boolean joinTable, String joinTableName,
+  public User findOne(String column, String[] condition, Boolean joinTable, String joinTableName,
       Connection<User> conn) {
     // TODO Auto-generated method stub
     throw new UnsupportedOperationException("Unimplemented method 'findOne'");

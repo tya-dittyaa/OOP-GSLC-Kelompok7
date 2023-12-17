@@ -2,7 +2,7 @@ import java.util.Scanner;
 
 public class App {
     private Scanner scanner = new Scanner(System.in);
-    private Hackathon hackathon;
+    private Hackathon hackathon = new Hackathon();
 
     public static void main(String[] args) throws Exception {
         new App();
@@ -38,12 +38,12 @@ public class App {
             case 1:
                 clearScreen();
                 Insert();
-                break;
+                return;
 
             case 2:
                 clearScreen();
                 Show();
-                break;
+                return;
 
             default:
                 System.out.println("Thank you for using this application...");
@@ -77,8 +77,14 @@ public class App {
         System.out.println();
 
         if (input == 1) {
-            System.out.print("Add name : ");
-            inputName = scanner.nextLine();
+            int checkLenInputName = 0;
+            int checkLenInputTeamName = 0;
+
+            do {
+                System.out.print("Add name : ");
+                inputName = scanner.nextLine();
+                checkLenInputName = inputName.length();
+            } while (checkLenInputName == 0);
 
             boolean isValidNIM = false;
             do {
@@ -89,10 +95,45 @@ public class App {
                     isValidNIM = true;
                 }
             } while (!isValidNIM);
+
+            do {
+                System.out.print("Add team : ");
+                inputTeamName = scanner.nextLine();
+                checkLenInputTeamName = inputTeamName.length();
+            } while (checkLenInputTeamName == 0);
+
+            Boolean isSuccess = hackathon.insertUser(inputNIM, inputName, inputTeamName);
+
+            System.out.println();
+            if (isSuccess) {
+                System.out.println("User created!");
+            } else {
+                System.err.println("Error: Team full.");
+            }
         }
 
-        System.out.print("Add team : ");
-        inputTeamName = scanner.nextLine();
+        else {
+            int checkLenInputTeamName = 0;
+
+            do {
+                System.out.print("Add team : ");
+                inputTeamName = scanner.nextLine();
+                checkLenInputTeamName = inputTeamName.length();
+            } while (checkLenInputTeamName == 0);
+
+            Boolean isSuccess = hackathon.insertTeam(inputTeamName);
+
+            System.out.println();
+            if (isSuccess) {
+                System.out.println("Team created!");
+            } else {
+                System.err.println("Error: Team name already exist.");
+            }
+        }
+
+        System.out.print("Press ENTER to continue...");
+        scanner.nextLine();
+        new App();
     }
 
     private void Show() {
